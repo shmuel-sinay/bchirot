@@ -27,8 +27,18 @@
   <button id="calc">הצג והשווה</button>
   <table id="exitTable"></table>
 </section>
+<section id="proj">
+  <h2>הערכה לפי סקרים והשתתפות במעוזים</h2>
+  <p class="note">זו הערכת מודל ולא סקר ולא תוצאות. השיטה: מנדטים בסקר × (אחוז הצבעה במעוזי הגוש היום ÷ אחוז הצבעה בבחירות הקודמות), ואז נרמול ל-120 מנדטים.</p>
+  <label>סקרים אחרונים (שורה לכל מפלגה: <code>שם: מנדטים: גוש</code>, גוש = ימין / שמאל / חרדים / ערבים)
+    <textarea id="polls" placeholder="הליכוד: 30: ימין"></textarea></label>
+  <div id="ratios"></div>
+  <button id="project">חשב הערכה</button>
+  <div id="projOut"></div>
+</section>
 </main>
 <script src="app.js"></script>
 <script src="exitpoll.js"></script>
+<script src="projection.js"></script>
 </body>
 </html>
