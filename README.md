@@ -12,3 +12,7 @@
 
 ## סקרי יציאה / מדגמים
 לא ממומש - דורש מקור נתונים חיצוני.
+
+## משיכה אוטומטית מ-mapvotes.bechirot.gov.il
+במחשב מקומי: `npm i playwright && npx playwright install chromium && node scripts/capture.mjs 5`
+הסקריפט שומר את כל ה-JSON שהמפה מושכת ל-`data/live/<זמן>/` ודוחף לענף. אחר כך מנתחים ומחברים לטבלה.
