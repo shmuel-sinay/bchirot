@@ -1,0 +1,10 @@
+body{font-family:system-ui,Arial,sans-serif;margin:0;background:#f5f6f8;color:#222}
+main{max-width:860px;margin:0 auto;padding:16px}
+label{margin-inline-end:16px}
+select{font-size:1rem;padding:4px}
+table{width:100%;border-collapse:collapse;margin-top:16px;background:#fff}
+th,td{padding:8px 10px;border-bottom:1px solid #e3e5e8;text-align:right}
+.bar{display:inline-block;height:10px;background:#3b82f6;border-radius:5px;vertical-align:middle;margin-inline-start:8px}
+.note{color:#a15c00;background:#fff4e0;padding:8px;border-radius:6px}
+.tag{padding:2px 8px;border-radius:10px;color:#fff;font-size:.85rem}
+.ימין{background:#1d4ed8}.שמאל{background:#dc2626}.חרדים{background:#111}.ערבים{background:#059669}

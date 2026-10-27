@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>אחוזי הצבעה לפי שכונות</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>אחוזי הצבעה לפי שכונות</h1>
+  <p class="note" id="note"></p>
+  <label>בחר עיר: <select id="city"></select></label>
+  <label>מיון: <select id="sort">
+    <option value="desc">מהגבוה לנמוך</option>
+    <option value="asc">מהנמוך לגבוה</option>
+  </select></label>
+  <table>
+    <thead><tr><th>#</th><th>שכונה</th><th>אחוז הצבעה</th><th>בעלי זכות</th><th>הצביעו</th><th>גוש מוביל</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
