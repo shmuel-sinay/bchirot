@@ -13,6 +13,10 @@ BLOCS = {
     'אופוזיציה יהודית': ['רק', 'דרך', 'ל', 'אמת', 'די', 'כן'],            # בנט, איזנקוט, ליברמן, הדמוקרטים, המילואימניקים, כחול לבן
     'ערבים': ['ודם', 'עם', 'ד', 'בד'],                                     # המשותפת, רע"ם, השותפות לכולם, ביחד נצליח
 }
+NAMES = {'מחל': 'הליכוד', 'ב': 'עוצמה יהודית', 'ט': 'הציונות הדתית וזהות', 'שס': 'ש"ס', 'ג': 'יהדות התורה', 'ני': 'נעם',
+         'רק': 'ביחד – בנט', 'דרך': 'איזנקוט', 'ל': 'ישראל ביתנו', 'אמת': 'הדמוקרטים', 'די': 'המילואימניקים', 'כן': 'כחול לבן',
+         'ודם': 'הרשימה המשותפת', 'עם': 'רע"ם', 'ך': 'עמך ישראל', 'זך': 'הציבור החרדי', 'ד': 'השותפות לכולם', 'בד': 'ביחד נצליח',
+         'נר': 'צבע שחור', 'פה': 'אני ואתה', 'בי': 'צומת בית ישראל', 'צדק': 'שרשר לאהבה', 'ה': 'גן עדן', 'י': 'ישראל תחילה'}
 DISQUALIFIED = 'ודם'                                                         # אושרה על תנאי עד הכרעת העליון
 K = 8
 ENV_CODE = 9999
@@ -194,6 +198,26 @@ def main(prev_path, now_path, out_dir=None):
     d2 = pd.DataFrame({q: [np.mean(runs2[q])] for q in NP}).T.rename(columns={0: 'seats_if_disqualified'})
     print(d2.sort_values('seats_if_disqualified', ascending=False).head(12).round(1).T.to_string())
     if out_dir:
+        bloc_of = {q: b_ for b_, ps in BLOCS.items() for q in ps}
+        c_ = J.copy()
+        city = nb.groupby('שם ישוב')[['בזב', 'מצביעים']].sum().sort_values('בזב', ascending=False).head(15)
+        city['top'] = nb.groupby('שם ישוב')[NP].sum().loc[city.index].idxmax(axis=1)
+        out = dict(
+            meta=dict(valid_counted=int(counted.sum()), eligible_counted=int(nb['בזב'].sum()), voted_counted=int(nb['מצביעים'].sum()),
+                      missing_voters=int(miss_votes.sum()), env_share=round(float(env_share_of_valid), 4),
+                      env_votes=int(total_est / (1 - env_share_of_valid) * env_share_of_valid), threshold=THRESH,
+                      settlements_missing=int((J.c < 0.02).sum()), settlements_partial=int(((J.c >= 0.02) & (J.c < 0.93)).sum()),
+                      cv_error=round(float(cv.loc[top_new, 'abs_err'].mean()), 4)),
+            parties=[dict(letter=p, name=NAMES.get(p, p), bloc=bloc_of.get(p, 'אחר'), votes_now=int(counted[p]), votes_missing=int(miss_votes[NP.index(p)]),
+                          env_share=round(float(env_new[p]), 4), seats_mean=round(float(np.mean(runs[p])), 1), p10=int(np.percentile(runs[p], 10)),
+                          p90=int(np.percentile(runs[p], 90)), entry_prob=round(float((np.array(runs[p]) > 0).mean()), 2),
+                          seats_if_disq=round(float(np.mean(runs2[p])), 1)) for p in counted.sort_values(ascending=False).index[:20]],
+            blocs=bl.to_dict('records'),
+            missing=miss.sort_values('מצביעים צפויים', ascending=False).head(15).rename(columns={'שם': 'name', 'מגזר': 'sector', 'נספר': 'counted', 'בעלי זכות חסרים': 'missing_eligible', 'מצביעים צפויים': 'expected_voters'}).to_dict('records'),
+            cities=[dict(city=i, eligible=int(r['בזב']), voted=int(r['מצביעים']), top=r['top']) for i, r in city.iterrows()],
+            validation=[dict(party=p, actual=round(float(cv.loc[p, 'actual']), 4), predicted=round(float(cv.loc[p, 'predicted']), 4)) for p in top_new],
+        )
+        json.dump(out, open(f"{out_dir}/forecast.json", 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
         bl.to_csv(f"{out_dir}/blocs.csv", index=False, encoding='utf-8')
         res.to_csv(f"{out_dir}/forecast.csv", index=False, encoding='utf-8')
         miss.sort_values('מצביעים צפויים', ascending=False).head(40).to_csv(f"{out_dir}/missing.csv", index=False, encoding='utf-8')

@@ -1,0 +1,559 @@
+{
+ "meta": {
+  "valid_counted": 4008086,
+  "eligible_counted": 5615541,
+  "voted_counted": 4026049,
+  "missing_voters": 1181174,
+  "env_share": 0.0963,
+  "env_votes": 552803,
+  "threshold": 0.0325,
+  "settlements_missing": 166,
+  "settlements_partial": 263,
+  "cv_error": 0.0017
+ },
+ "parties": [
+  {
+   "letter": "מחל",
+   "name": "הליכוד",
+   "bloc": "קואליציה",
+   "votes_now": 828972,
+   "votes_missing": 241676,
+   "env_share": 0.2197,
+   "seats_mean": 27.0,
+   "p10": 27,
+   "p90": 27,
+   "entry_prob": 1.0,
+   "seats_if_disq": 29.5
+  },
+  {
+   "letter": "דרך",
+   "name": "איזנקוט",
+   "bloc": "אופוזיציה יהודית",
+   "votes_now": 640241,
+   "votes_missing": 197733,
+   "env_share": 0.1142,
+   "seats_mean": 20.5,
+   "p10": 20,
+   "p90": 21,
+   "entry_prob": 1.0,
+   "seats_if_disq": 22.4
+  },
+  {
+   "letter": "ודם",
+   "name": "הרשימה המשותפת",
+   "bloc": "ערבים",
+   "votes_now": 396534,
+   "votes_missing": 100999,
+   "env_share": 0.0,
+   "seats_mean": 11.0,
+   "p10": 11,
+   "p90": 11,
+   "entry_prob": 1.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "רק",
+   "name": "ביחד – בנט",
+   "bloc": "אופוזיציה יהודית",
+   "votes_now": 353717,
+   "votes_missing": 103714,
+   "env_share": 0.0622,
+   "seats_mean": 11.0,
+   "p10": 11,
+   "p90": 11,
+   "entry_prob": 1.0,
+   "seats_if_disq": 12.0
+  },
+  {
+   "letter": "אמת",
+   "name": "הדמוקרטים",
+   "bloc": "אופוזיציה יהודית",
+   "votes_now": 254429,
+   "votes_missing": 87716,
+   "env_share": 0.0441,
+   "seats_mean": 8.0,
+   "p10": 8,
+   "p90": 8,
+   "entry_prob": 1.0,
+   "seats_if_disq": 9.0
+  },
+  {
+   "letter": "ג",
+   "name": "יהדות התורה",
+   "bloc": "קואליציה",
+   "votes_now": 240648,
+   "votes_missing": 58123,
+   "env_share": 0.0695,
+   "seats_mean": 7.0,
+   "p10": 7,
+   "p90": 7,
+   "entry_prob": 1.0,
+   "seats_if_disq": 8.0
+  },
+  {
+   "letter": "ל",
+   "name": "ישראל ביתנו",
+   "bloc": "אופוזיציה יהודית",
+   "votes_now": 239040,
+   "votes_missing": 71360,
+   "env_share": 0.053,
+   "seats_mean": 7.2,
+   "p10": 7,
+   "p90": 8,
+   "entry_prob": 1.0,
+   "seats_if_disq": 8.0
+  },
+  {
+   "letter": "ב",
+   "name": "עוצמה יהודית",
+   "bloc": "קואליציה",
+   "votes_now": 220798,
+   "votes_missing": 61589,
+   "env_share": 0.0827,
+   "seats_mean": 7.1,
+   "p10": 7,
+   "p90": 7,
+   "entry_prob": 1.0,
+   "seats_if_disq": 8.0
+  },
+  {
+   "letter": "שס",
+   "name": "ש\"ס",
+   "bloc": "קואליציה",
+   "votes_now": 217202,
+   "votes_missing": 62140,
+   "env_share": 0.0703,
+   "seats_mean": 6.9,
+   "p10": 7,
+   "p90": 7,
+   "entry_prob": 1.0,
+   "seats_if_disq": 7.3
+  },
+  {
+   "letter": "עם",
+   "name": "רע\"ם",
+   "bloc": "ערבים",
+   "votes_now": 207230,
+   "votes_missing": 89226,
+   "env_share": 0.0,
+   "seats_mean": 6.2,
+   "p10": 6,
+   "p90": 7,
+   "entry_prob": 1.0,
+   "seats_if_disq": 7.0
+  },
+  {
+   "letter": "ט",
+   "name": "הציונות הדתית וזהות",
+   "bloc": "קואליציה",
+   "votes_now": 196346,
+   "votes_missing": 48143,
+   "env_share": 0.2139,
+   "seats_mean": 8.0,
+   "p10": 8,
+   "p90": 8,
+   "entry_prob": 1.0,
+   "seats_if_disq": 8.8
+  },
+  {
+   "letter": "די",
+   "name": "המילואימניקים",
+   "bloc": "אופוזיציה יהודית",
+   "votes_now": 105851,
+   "votes_missing": 30347,
+   "env_share": 0.0235,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "ך",
+   "name": "עמך ישראל",
+   "bloc": "אחר",
+   "votes_now": 66037,
+   "votes_missing": 16552,
+   "env_share": 0.0302,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "זך",
+   "name": "הציבור החרדי",
+   "bloc": "קואליציה",
+   "votes_now": 8350,
+   "votes_missing": 1585,
+   "env_share": 0.0046,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "נר",
+   "name": "צבע שחור",
+   "bloc": "קואליציה",
+   "votes_now": 8199,
+   "votes_missing": 2167,
+   "env_share": 0.0018,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "ני",
+   "name": "נעם",
+   "bloc": "קואליציה",
+   "votes_now": 6219,
+   "votes_missing": 1754,
+   "env_share": 0.007,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "בי",
+   "name": "צומת בית ישראל",
+   "bloc": "אחר",
+   "votes_now": 4230,
+   "votes_missing": 1231,
+   "env_share": 0.0009,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "ד",
+   "name": "השותפות לכולם",
+   "bloc": "ערבים",
+   "votes_now": 3087,
+   "votes_missing": 917,
+   "env_share": 0.0,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "צדק",
+   "name": "שרשר לאהבה",
+   "bloc": "אחר",
+   "votes_now": 1456,
+   "votes_missing": 435,
+   "env_share": 0.0004,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  },
+  {
+   "letter": "בד",
+   "name": "ביחד נצליח",
+   "bloc": "ערבים",
+   "votes_now": 1035,
+   "votes_missing": 287,
+   "env_share": 0.0001,
+   "seats_mean": 0.0,
+   "p10": 0,
+   "p90": 0,
+   "entry_prob": 0.0,
+   "seats_if_disq": 0.0
+  }
+ ],
+ "blocs": [
+  {
+   "scenario": "כל הרשימות מתמודדות",
+   "coalition": 56.1,
+   "opposition": 46.8,
+   "arab": 17.2,
+   "p_coalition_61": 0.0,
+   "p_opp_arab_61": 1.0,
+   "p_opp_only_61": 0.0,
+   "p_none_61": 0.0
+  },
+  {
+   "scenario": "המשותפת נפסלת",
+   "coalition": 61.6,
+   "opposition": 51.4,
+   "arab": 7.0,
+   "p_coalition_61": 0.98,
+   "p_opp_arab_61": 0.0,
+   "p_opp_only_61": 0.0,
+   "p_none_61": 0.02
+  }
+ ],
+ "missing": [
+  {
+   "name": "תל אביב  יפו",
+   "sector": "כללי",
+   "counted": 0.62,
+   "missing_eligible": 182149,
+   "expected_voters": 118243
+  },
+  {
+   "name": "באר שבע",
+   "sector": "כללי",
+   "counted": 0.37,
+   "missing_eligible": 111785,
+   "expected_voters": 73513
+  },
+  {
+   "name": "חולון",
+   "sector": "כללי",
+   "counted": 0.54,
+   "missing_eligible": 78095,
+   "expected_voters": 53051
+  },
+  {
+   "name": "אשדוד",
+   "sector": "כללי",
+   "counted": 0.62,
+   "missing_eligible": 74827,
+   "expected_voters": 50648
+  },
+  {
+   "name": "רמת גן",
+   "sector": "כללי",
+   "counted": 0.52,
+   "missing_eligible": 71430,
+   "expected_voters": 50298
+  },
+  {
+   "name": "בני ברק",
+   "sector": "חרדי",
+   "counted": 0.55,
+   "missing_eligible": 57993,
+   "expected_voters": 44942
+  },
+  {
+   "name": "כפר סבא",
+   "sector": "כללי",
+   "counted": 0.41,
+   "missing_eligible": 51406,
+   "expected_voters": 38058
+  },
+  {
+   "name": "בת ים",
+   "sector": "כללי",
+   "counted": 0.51,
+   "missing_eligible": 65439,
+   "expected_voters": 36759
+  },
+  {
+   "name": "אשקלון",
+   "sector": "כללי",
+   "counted": 0.59,
+   "missing_eligible": 52514,
+   "expected_voters": 35699
+  },
+  {
+   "name": "רעננה",
+   "sector": "כללי",
+   "counted": 0.34,
+   "missing_eligible": 49428,
+   "expected_voters": 34574
+  },
+  {
+   "name": "הרצליה",
+   "sector": "כללי",
+   "counted": 0.58,
+   "missing_eligible": 39935,
+   "expected_voters": 28599
+  },
+  {
+   "name": "הוד השרון",
+   "sector": "כללי",
+   "counted": 0.4,
+   "missing_eligible": 31256,
+   "expected_voters": 24695
+  },
+  {
+   "name": "אילת",
+   "sector": "כללי",
+   "counted": 0.18,
+   "missing_eligible": 45499,
+   "expected_voters": 20833
+  },
+  {
+   "name": "ראשון לציון",
+   "sector": "כללי",
+   "counted": 0.88,
+   "missing_eligible": 27705,
+   "expected_voters": 19719
+  },
+  {
+   "name": "רהט",
+   "sector": "ערבי",
+   "counted": 0.46,
+   "missing_eligible": 22331,
+   "expected_voters": 18841
+  }
+ ],
+ "cities": [
+  {
+   "city": "ירושלים",
+   "eligible": 447170,
+   "voted": 295140,
+   "top": "ג"
+  },
+  {
+   "city": "תל אביב - יפו",
+   "eligible": 297673,
+   "voted": 194208,
+   "top": "דרך"
+  },
+  {
+   "city": "חיפה",
+   "eligible": 261739,
+   "voted": 162032,
+   "top": "דרך"
+  },
+  {
+   "city": "נתניה",
+   "eligible": 204566,
+   "voted": 124202,
+   "top": "מחל"
+  },
+  {
+   "city": "ראשון לציון",
+   "eligible": 199402,
+   "voted": 142638,
+   "top": "מחל"
+  },
+  {
+   "city": "פתח תקווה",
+   "eligible": 190772,
+   "voted": 139549,
+   "top": "מחל"
+  },
+  {
+   "city": "אשדוד",
+   "eligible": 120053,
+   "voted": 81668,
+   "top": "מחל"
+  },
+  {
+   "city": "רחובות",
+   "eligible": 96269,
+   "voted": 70830,
+   "top": "מחל"
+  },
+  {
+   "city": "בית שמש",
+   "eligible": 94000,
+   "voted": 63640,
+   "top": "ג"
+  },
+  {
+   "city": "חולון",
+   "eligible": 93251,
+   "voted": 63666,
+   "top": "מחל"
+  },
+  {
+   "city": "חדרה",
+   "eligible": 80230,
+   "voted": 55461,
+   "top": "מחל"
+  },
+  {
+   "city": "רמת גן",
+   "eligible": 77643,
+   "voted": 54948,
+   "top": "דרך"
+  },
+  {
+   "city": "אשקלון",
+   "eligible": 75966,
+   "voted": 51901,
+   "top": "מחל"
+  },
+  {
+   "city": "בני ברק",
+   "eligible": 72274,
+   "voted": 56291,
+   "top": "ג"
+  },
+  {
+   "city": "מודיעין-מכבים-רעות",
+   "eligible": 72082,
+   "voted": 56986,
+   "top": "דרך"
+  }
+ ],
+ "validation": [
+  {
+   "party": "מחל",
+   "actual": 0.1872,
+   "predicted": 0.1845
+  },
+  {
+   "party": "דרך",
+   "actual": 0.1507,
+   "predicted": 0.1458
+  },
+  {
+   "party": "ודם",
+   "actual": 0.1218,
+   "predicted": 0.1245
+  },
+  {
+   "party": "רק",
+   "actual": 0.0777,
+   "predicted": 0.0769
+  },
+  {
+   "party": "אמת",
+   "actual": 0.0614,
+   "predicted": 0.0632
+  },
+  {
+   "party": "ג",
+   "actual": 0.0776,
+   "predicted": 0.0799
+  },
+  {
+   "party": "ל",
+   "actual": 0.0504,
+   "predicted": 0.0494
+  },
+  {
+   "party": "ב",
+   "actual": 0.0547,
+   "predicted": 0.054
+  },
+  {
+   "party": "שס",
+   "actual": 0.0555,
+   "predicted": 0.0569
+  },
+  {
+   "party": "עם",
+   "actual": 0.0497,
+   "predicted": 0.0491
+  },
+  {
+   "party": "ט",
+   "actual": 0.0584,
+   "predicted": 0.0597
+  },
+  {
+   "party": "די",
+   "actual": 0.0247,
+   "predicted": 0.0247
+  }
+ ]
+}

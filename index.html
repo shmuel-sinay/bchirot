@@ -3,42 +3,94 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>אחוזי הצבעה לפי שכונות</title>
-<link rel="stylesheet" href="style.css">
+<title>מצב הבחירות</title>
+<meta name="description" content="תוצאות ותחזית מנדטים לכנסת, עם השלמת יישובים שטרם נספרו וסימולטור לגושים.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700;900&family=Heebo:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
-<main>
-  <h1>אחוזי הצבעה לפי שכונות</h1>
-  <p class="note" id="note"></p>
-  <p><label>טען קובץ CSV מוועדת הבחירות (עמודות: עיר, שכונה, בעלי זכות בחירה, מצביעים): <input type="file" id="file" accept=".csv,.txt"></label></p>
-  <label>בחר עיר: <select id="city"></select></label>
-  <label>מיון: <select id="sort">
-    <option value="desc">מהגבוה לנמוך</option>
-    <option value="asc">מהנמוך לגבוה</option>
-  </select></label>
-  <table>
-    <thead><tr><th>#</th><th>שכונה</th><th>אחוז הצבעה</th><th>בעלי זכות</th><th>הצביעו</th><th>גוש מוביל</th></tr></thead>
-    <tbody id="rows"></tbody>
-  </table>
-<section id="exit">
-  <h2>מדגמי יציאה</h2>
-  <p class="note">הדבק לכל ערוץ שורות בפורמט <code>שם מפלגה: מנדטים</code> (למשל <code>הליכוד: 30</code>). הנתונים נשמרים בדפדפן בלבד.</p>
-  <div id="channels"></div>
-  <button id="calc">הצג והשווה</button>
-  <table id="exitTable"></table>
-</section>
-<section id="proj">
-  <h2>הערכה לפי סקרים והשתתפות במעוזים</h2>
-  <p class="note">זו הערכת מודל ולא סקר ולא תוצאות. השיטה: מנדטים בסקר × (אחוז הצבעה במעוזי הגוש היום ÷ אחוז הצבעה בבחירות הקודמות), ואז נרמול ל-120 מנדטים.</p>
-  <label>סקרים אחרונים (שורה לכל מפלגה: <code>שם: מנדטים: גוש</code>, גוש = ימין / שמאל / חרדים / ערבים)
-    <textarea id="polls" placeholder="הליכוד: 30: ימין"></textarea></label>
-  <div id="ratios"></div>
-  <button id="project">חשב הערכה</button>
-  <div id="projOut"></div>
-</section>
+<header class="top">
+  <div class="wrap top-in">
+    <div class="brand"><span class="mark" aria-hidden="true"></span><span>מצב הבחירות</span></div>
+    <nav aria-label="ניווט">
+      <a href="#seats">מנדטים</a><a href="#sim">סימולטור</a><a href="#lists">רשימות</a><a href="#missing">מה חסר</a><a href="#method">שיטה</a>
+    </nav>
+    <button id="theme" class="ghost" type="button" aria-label="החלפת מצב תצוגה">◐</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero" id="seats">
+    <div class="hero-text">
+      <p class="eyebrow" id="stamp">תחזית משוקללת</p>
+      <h1 id="headline">—</h1>
+      <p class="lede" id="lede">—</p>
+    </div>
+    <figure class="hemi-card">
+      <svg id="hemi" viewBox="0 0 640 345" role="img" aria-label="תרשים חצי עיגול של 120 המנדטים"></svg>
+      <figcaption id="legend" class="legend"></figcaption>
+    </figure>
+  </section>
+
+  <section class="blocs" aria-label="גושים">
+    <div class="bloc" data-bloc="קואליציה"><span class="k">קואליציה</span><b id="b0">—</b><small>הליכוד, עוצמה יהודית, הציונות הדתית, ש"ס, יהדות התורה, נעם</small></div>
+    <div class="bloc" data-bloc="אופוזיציה יהודית"><span class="k">אופוזיציה יהודית</span><b id="b1">—</b><small>בנט, איזנקוט, ישראל ביתנו, הדמוקרטים, המילואימניקים</small></div>
+    <div class="bloc" data-bloc="ערבים"><span class="k">רשימות ערביות</span><b id="b2">—</b><small>הרשימה המשותפת ורע"ם</small></div>
+    <div class="meter" aria-live="polite">
+      <div class="track"><i id="mC"></i><i id="mO"></i><i id="mA"></i><u></u></div>
+      <p id="meterNote">—</p>
+    </div>
+  </section>
+
+  <section class="panel sim" id="sim">
+    <div class="panel-head">
+      <h2>סימולטור</h2>
+      <p>כך משתנה החלוקה כשמשנים את ההנחות. הברירות הן ההערכה הראשית.</p>
+    </div>
+    <div class="controls">
+      <label>גודל המעטפות החיצוניות <output id="oEnv"></output>
+        <input id="env" type="range" min="0" max="16" step="0.5" value="9.6"></label>
+      <label>הצבעה ביישובים שטרם נספרו <output id="oTurn"></output>
+        <input id="turn" type="range" min="70" max="115" step="1" value="100"></label>
+      <label class="check"><input id="disq" type="checkbox"> הרשימה המשותפת נפסלת וקולותיה לא נספרים</label>
+      <button id="reset" class="ghost" type="button">איפוס</button>
+    </div>
+    <p class="note">בכל התרחישים אין מעטפות חיצוניות לרשימות ערביות. הסימולטור מחשב אחוז חסימה של 3.25% וחלוקה לפי שיטת בדר-עופר ללא הסכמי עודפים.</p>
+  </section>
+
+  <section class="panel" id="lists">
+    <div class="panel-head"><h2>כל הרשימות</h2><p>הטווח הוא 10% עד 90% מתוך אלפי סימולציות של החלק שטרם נספר.</p></div>
+    <div class="scroll">
+      <table id="tbl">
+        <thead><tr><th>רשימה</th><th>קולות שנספרו</th><th>קולות בתחזית</th><th>אחוז</th><th>מנדטים בתחזית</th><th>טווח</th><th>סיכוי כניסה</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="panel" id="missing">
+    <div class="panel-head"><h2>מה עוד לא נספר</h2><p id="missingLede">—</p></div>
+    <div class="two">
+      <div class="scroll"><table id="mtbl"><thead><tr><th>יישוב</th><th>מגזר</th><th>נספר</th><th>בעלי זכות חסרים</th><th>מצביעים צפויים</th></tr></thead><tbody></tbody></table></div>
+      <div class="scroll"><table id="ctbl"><thead><tr><th>עיר (שנספרה)</th><th>הצבעה</th><th>רשימה מובילה</th></tr></thead><tbody></tbody></table></div>
+    </div>
+  </section>
+
+  <section class="panel prose" id="method">
+    <h2>איך זה מחושב</h2>
+    <ol>
+      <li><b>קלפיות שנספרו.</b> סוכמו לפי יישוב ומושוו לבעלי זכות הבחירה בבחירות הקודמות, עם תיקון לגידול לפי מגזר.</li>
+      <li><b>יישובים שטרם נספרו.</b> מודל רגרסיה למד מהיישובים שנספרו במלואם איך פרופיל ההצבעה הקודם בכל יישוב התחלף להצבעה היום, וממלא בעזרתו את מה שחסר.</li>
+      <li><b>מעטפות חיצוניות.</b> גודלן וההרכב שלהן נלקחו מהבחירות הקודמות. הרשימות הערביות הוצאו מהן והשאר מנורמל.</li>
+      <li><b>אי ודאות.</b> אלפי הרצות עם שאריות אמיתיות של המודל, גודל מעטפות והשתתפות משתנים.</li>
+    </ol>
+    <div id="valid" class="valid"></div>
+    <p class="note">זו הערכת מודל ולא תוצאות רשמיות. ביישוב שנספר חלקית לא ידוע אילו שכונות חסרות, והחלק החסר מושלם לפי פרופיל היישוב כולו. האותיות והשמות לפי רשימת ועדת הבחירות מ‑27.09.26. הרשימה המשותפת אושרה על תנאי עד הכרעת בית המשפט העליון.</p>
+  </section>
 </main>
-<script src="app.js"></script>
-<script src="exitpoll.js"></script>
-<script src="projection.js"></script>
+<footer class="wrap foot"><span>קוד ונתונים פתוחים במאגר. הסקריפטים בתיקיית <code>scripts</code>.</span><a href="legacy/index.html">האתר הקודם</a></footer>
+<script src="assets/app.js"></script>
 </body>
 </html>
