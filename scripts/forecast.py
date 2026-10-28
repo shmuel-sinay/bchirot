@@ -7,6 +7,13 @@ META = ['סמל ועדה','ברזל','שם ישוב','סמל ישוב','קלפי
 OLD_ARAB = ['ום', 'עם', 'ד']
 NEW_ARAB = ['ודם', 'עם', 'ד']
 THRESH = 0.0325
+# גושים לפי אותיות הפתק (ועדת הבחירות, 27.09.26)
+BLOCS = {
+    'קואליציה': ['מחל', 'ב', 'ט', 'שס', 'ג', 'ני', 'נר', 'זך'],           # הליכוד, עוצמה יהודית, ציונות דתית+זהות, ש"ס, יהדות התורה, נעם
+    'אופוזיציה יהודית': ['רק', 'דרך', 'ל', 'אמת', 'די', 'כן'],            # בנט, איזנקוט, ליברמן, הדמוקרטים, המילואימניקים, כחול לבן
+    'ערבים': ['ודם', 'עם', 'ד', 'בד'],                                     # המשותפת, רע"ם, השותפות לכולם, ביחד נצליח
+}
+DISQUALIFIED = 'ודם'                                                         # אושרה על תנאי עד הכרעת העליון
 K = 8
 ENV_CODE = 9999
 
@@ -149,7 +156,8 @@ def main(prev_path, now_path, out_dir=None):
     # --- סימולציה
     base_now = counted + pd.Series(miss_votes, index=NP)
     total_est = base_now.sum()
-    runs = {p: [] for p in NP}
+    runs = {p: [] for p in NP}; runs2 = {p: [] for p in NP}
+    bloc_runs = {b_: [] for b_ in BLOCS}; bloc_runs2 = {b_: [] for b_ in BLOCS}
     N = 4000
     mv_votes = np.array([v for v, _ in miss_items]); mv_sh = np.array([h for _, h in miss_items])
     for _ in range(N):
@@ -163,6 +171,10 @@ def main(prev_path, now_path, out_dir=None):
         t_ = counted + mv + pd.Series(d, index=NP) * env_size
         s = seats_for(t_.to_dict())
         for p in NP: runs[p].append(s.get(p, 0))
+        s2 = seats_for({k: v for k, v in t_.items() if k != DISQUALIFIED})
+        for b_, ps in BLOCS.items():
+            bloc_runs[b_].append(sum(s.get(q, 0) for q in ps)); bloc_runs2[b_].append(sum(s2.get(q, 0) for q in ps))
+        for q in NP: runs2[q].append(s2.get(q, 0))
     print(f"\nמעטפות חיצוניות ב‑2022: {env_share_of_valid:.1%} מהכשרים")
     rows = []
     final_mean = counted + pd.Series(miss_votes, index=NP) + env_new * (total_est / (1 - env_share_of_valid) * env_share_of_valid)
@@ -172,7 +184,17 @@ def main(prev_path, now_path, out_dir=None):
                          seats_mean=round(v.mean(), 1), p10=int(np.percentile(v, 10)), p90=int(np.percentile(v, 90)), entry_prob=round((v > 0).mean(), 2)))
     res = pd.DataFrame(rows)
     print(res.to_string(index=False))
+    brow = []
+    for label, br, rr in (('כל הרשימות מתמודדות', bloc_runs, runs), ('המשותפת נפסלת', bloc_runs2, runs2)):
+        co = np.array(br['קואליציה']); op = np.array(br['אופוזיציה יהודית']); ar = np.array(br['ערבים'])
+        brow.append(dict(scenario=label, coalition=round(co.mean(), 1), opposition=round(op.mean(), 1), arab=round(ar.mean(), 1),
+                         p_coalition_61=round((co >= 61).mean(), 2), p_opp_arab_61=round(((op + ar) >= 61).mean(), 2),
+                         p_opp_only_61=round((op >= 61).mean(), 2), p_none_61=round(((co < 61) & ((op + ar) < 61)).mean(), 2)))
+    bl = pd.DataFrame(brow); print(bl.T.to_string())
+    d2 = pd.DataFrame({q: [np.mean(runs2[q])] for q in NP}).T.rename(columns={0: 'seats_if_disqualified'})
+    print(d2.sort_values('seats_if_disqualified', ascending=False).head(12).round(1).T.to_string())
     if out_dir:
+        bl.to_csv(f"{out_dir}/blocs.csv", index=False, encoding='utf-8')
         res.to_csv(f"{out_dir}/forecast.csv", index=False, encoding='utf-8')
         miss.sort_values('מצביעים צפויים', ascending=False).head(40).to_csv(f"{out_dir}/missing.csv", index=False, encoding='utf-8')
         cv.loc[top_new].reset_index().rename(columns={'index': 'party'}).to_csv(f"{out_dir}/validation.csv", index=False, encoding='utf-8')
